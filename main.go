@@ -271,16 +271,6 @@ func main() {
 				}
 			}
 
-			// pushTarget := fmt.Sprintf("%s:%s", localBranch.Name().Short(), repoSync.mapBranch(remoteBranch.Name().Short()))
-			// cmdLst := []string{"git", "push", "-u", rs.TargetRemote.Name, pushTarget, "--force"}
-			// log.Info("Pushing with %v", cmdLst)
-			// cmd := exec.Command(cmdLst[0], cmdLst[1:]...)
-			// cmd.Dir = rs.Path
-			// _, err = cmd.Output()
-			// if err != nil {
-			// 	log.Errorf("failed to push %s to %s in %s: %v; error was %s", localBranch.Name().Short(), pushTarget, rs.TargetRemote.Name, err, cmd.Stderr)
-			// }
-
 			status, err := w.Status()
 			if err != nil {
 				log.Errorf("failed to get repo status: %v", err)
@@ -288,7 +278,6 @@ func main() {
 			} else {
 				log.Infof("Repository status: %v", status)
 			}
-
 		}
 
 		// Push all tags
