@@ -249,12 +249,12 @@ func main() {
 				os.Exit(1)
 			}
 
-			requiredRefSpecStr := fmt.Sprintf(
+			refSpecStr := fmt.Sprintf(
 				"+%s:refs/heads/%s",
 				localBranch.Name().String(),
 				repoSync.mapBranch(remoteBranch.Name().Short()),
 			)
-			refSpec := config.RefSpec(requiredRefSpecStr)
+			refSpec := config.RefSpec(refSpecStr)
 			log.Infof("Pushing %s", refSpec)
 			err = repo.Push(&git.PushOptions{
 				RemoteName: rs.TargetRemote.Name,
@@ -264,9 +264,9 @@ func main() {
 			})
 			if err != nil {
 				if err == git.NoErrAlreadyUpToDate {
-					log.Infof("remote up to date - %s", requiredRefSpecStr)
+					log.Infof("remote up to date - %s", refSpecStr)
 				} else {
-					log.Errorf("failed to push %s: %v", requiredRefSpecStr, err)
+					log.Errorf("failed to push %s: %v", refSpecStr, err)
 					os.Exit(1)
 				}
 			}
